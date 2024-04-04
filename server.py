@@ -5,6 +5,10 @@ import subprocess
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if self.path == '/':
+            # Serve index.html as the default page
+            self.path = '/index.html'
+            
         if self.path == '/index.html':
             with open('index.html', 'rb') as file:
                 self.send_response(200)

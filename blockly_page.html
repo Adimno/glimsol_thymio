@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,41 +12,43 @@
     <script src="https://unpkg.com/blockly/python_compressed.js"></script>
     <script src="https://unpkg.com/blockly/python.js"></script>
 
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Thymio Online Compiler</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">Python </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="blockly_page.html">Blockly </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header">
-            Blockly Editor
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Thymio Online Compiler</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Python</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="blockly_page.html">Blockly</a>
+                </li>
+            </ul>
+            </ul>
         </div>
-        <div class="card-body">
-            <!-- Create a workspace for Blockly -->
-            <div id="blocklyDiv" style="height: 480px; width: 100%;"></div>
-            <div id="preview" class="mt-3">
-                <div class="card">
-                    <div class="card-header">
-                        Preview
-                    </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                Blockly Editor
+            </div>
+            <div class="card-body">
+                <!-- Create a workspace for Blockly -->
+                <div id="blocklyDiv" style="height: 480px; width: 100%;"></div>
+                <div id="preview" class="mt-3">
+                    <button class="btn btn-primary" onclick="runVplCode()">Run</button>
+                    <div id="blockly-output" class="mt-3"></div>
                     <div class="card-body" id="previewBody">
                         <!-- Preview content will be updated dynamically -->
                     </div>
@@ -53,87 +56,158 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
-<!-- Blockly Toolbox -->
-<xml id="toolbox" style="display: none">
-    <!-- Define blocks here -->
-    <category name="Logic" colour="%{BKY_LOGIC_HUE}">
-        <block type="controls_if"></block>
-        <block type="logic_compare"></block>
-        <block type="logic_operation"></block>
-        <block type="logic_negate"></block>
-        <block type="logic_boolean"></block>
-        <block type="logic_null"></block>
-        <block type="logic_ternary"></block>
-    </category>
-    <category name="Loops" colour="%{BKY_LOOPS_HUE}">
-        <block type="controls_repeat_ext">
-            <value name="TIMES">
-                <shadow type="math_number">
-                    <field name="NUM">10</field>
-                </shadow>
-            </value>
-        </block>
-        <block type="controls_whileUntil"></block>
-        <block type="controls_for"></block>
-        <block type="controls_forEach"></block>
-        <block type="controls_flow_statements"></block>
-    </category>
-    <category name="Math" colour="%{BKY_MATH_HUE}">
-        <block type="math_number"></block>
-        <block type="math_arithmetic"></block>
-        <block type="math_single"></block>
-        <block type="math_trig"></block>
-        <block type="math_constant"></block>
-        <block type="math_number_property"></block>
-        <block type="math_round"></block>
-        <block type="math_on_list"></block>
-        <block type="math_modulo"></block>
-        <block type="math_constrain"></block>
-        <block type="math_random_int"></block>
-        <block type="math_random_float"></block>
-    </category>
-    <category name="Text" colour="%{BKY_TEXTS_HUE}">
-        <block type="text"></block>
-        <block type="text_join"></block>
-        <block type="text_append"></block>
-        <block type="text_length"></block>
-        <block type="text_isEmpty"></block>
-        <block type="text_indexOf"></block>
-        <block type="text_charAt"></block>
-        <block type="text_getSubstring"></block>
-        <block type="text_changeCase"></block>
-        <block type="text_trim"></block>
-        <block type="text_print"></block>
-        <block type="text_prompt_ext"></block>
+    <!-- Blockly Toolbox -->
+    <xml id="toolbox" style="display: none">
+        <!-- Define blocks here -->
+        <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+            <block type="controls_if"></block>
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+            <block type="logic_null"></block>
+            <block type="logic_ternary"></block>
+        </category>
+        <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+            <block type="controls_repeat_ext">
+                <value name="TIMES">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for"></block>
+            <block type="controls_forEach"></block>
+            <block type="controls_flow_statements"></block>
+        </category>
+        <category name="Math" colour="%{BKY_MATH_HUE}">
+            <block type="math_number"></block>
+            <block type="math_arithmetic"></block>
+            <block type="math_single"></block>
+            <block type="math_trig"></block>
+            <block type="math_constant"></block>
+            <block type="math_number_property"></block>
+            <block type="math_round"></block>
+            <block type="math_on_list"></block>
+            <block type="math_modulo"></block>
+            <block type="math_constrain"></block>
+            <block type="math_random_int"></block>
+            <block type="math_random_float"></block>
+        </category>
+        <category name="Text" colour="%{BKY_TEXTS_HUE}">
+            <block type="text"></block>
+            <block type="text_join"></block>
+            <block type="text_append"></block>
+            <block type="text_length"></block>
+            <block type="text_isEmpty"></block>
+            <block type="text_indexOf"></block>
+            <block type="text_charAt"></block>
+            <block type="text_getSubstring"></block>
+            <block type="text_changeCase"></block>
+            <block type="text_trim"></block>
+            <block type="text_print"></block>
+            <block type="text_prompt_ext"></block>
 
-        <block type="colour_picker"></block>
-    </category>
+            <block type="colour_picker"></block>
+        </category>
 
-    
-</xml>
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </xml>
 
-<script>
-    // Load Blockly workspace
-    var workspace = Blockly.inject('blocklyDiv', {
-        toolbox: document.getElementById('toolbox')
-    });
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
-    // Function to update preview card with generated code
-    function updatePreview() {
-        var previewBody = document.getElementById("previewBody");
-        var code = Blockly.Python.workspaceToCode(workspace);
-        previewBody.textContent = code;
-    }
+    <script>
+        // Load Blockly workspace
+        var workspace = Blockly.inject('blocklyDiv', {
+            toolbox: document.getElementById('toolbox')
+        });
 
-    // Listen for changes in Blockly workspace and update preview accordingly
-    workspace.addChangeListener(updatePreview);
-</script>
+
+
+
+        // Function to update preview card with generated code
+        function updatePreview() {
+            var previewBody = document.getElementById("previewBody");
+            var code = Blockly.Python.workspaceToCode(workspace);
+
+            // Clear previous content
+            previewBody.innerHTML = "";
+
+            // Create elements similar to runVplCode function
+            var card = document.createElement("div");
+            card.className = "card";
+            var cardBody = document.createElement("div");
+            cardBody.className = "card-body";
+            var cardText = document.createElement("p");
+            cardText.className = "text-info";
+            cardText.textContent = "Preview: " + code;
+
+            // Append elements to each other and to the preview body
+            cardBody.appendChild(cardText);
+            card.appendChild(cardBody);
+            previewBody.appendChild(card);
+        }
+
+
+        function generateVplCode() {
+            var code = Blockly.JavaScript.workspaceToCode(workspace);
+            document.getElementById('blocklyDiv').value = code;
+        }
+
+        function runVplCode() {
+            // Generate VPL code from Blockly workspace
+            generateVplCode();
+            var code = Blockly.Python.workspaceToCode(workspace);
+
+            // Clear previous content
+            var outputDiv = document.getElementById("previewBody");
+            outputDiv.innerHTML = "";
+
+            try {
+                // Execute the generated VPL code
+                var output = evalVplCode(code);
+
+                // Display the output
+                var card = document.createElement("div");
+                card.className = "card";
+                var cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+                var cardText = document.createElement("p");
+                cardText.className = "text-success";
+                cardText.textContent = "Output: " + output;
+                cardBody.appendChild(cardText);
+                card.appendChild(cardBody);
+                outputDiv.appendChild(card);
+            } catch (error) {
+                // Display error if any
+                displayError(error);
+            }
+        }
+
+        // Function to execute VPL code
+        function evalVplCode(code) {
+            // This is a placeholder for executing VPL code.
+            // You should replace this with your actual logic to interpret and execute the VPL code.
+            // For example, if the generated code is JavaScript, you can use eval(code).
+            // Ensure proper security measures when executing code dynamically.
+            return eval(code); // Not recommended for production use due to security risks
+        }
+
+        // Listen for changes in Blockly workspace and update preview accordingly
+        workspace.addChangeListener(updatePreview);
+    </script>
 </body>
+
 </html>
